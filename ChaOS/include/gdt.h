@@ -9,8 +9,9 @@ struct gdt_ptr {
   uint32_t ptr;
 } __attribute__ ((packed));
 
+// Definition of a single entry in the GDT
 struct gdt_entry {
-  uint16_t limit_lwo;
+  uint16_t limit_low;
   uint16_t base_low;
   uint8_t base_middle;
   uint8_t access;
@@ -21,6 +22,8 @@ struct gdt_entry {
 struct gdt_entry gdt[3];
 struct gdt_ptr gp;
 
-void setupGDT();
+extern void gdt_flush();
+
+void setup_gdt();
 
 #endif

@@ -1,4 +1,8 @@
 #include <stdint.h>
+
+// ChaOS includes.
+#include <gdt.h>
+
 #define CONSOLE_COLOR 0x07
 
 volatile unsigned char* vram = (unsigned char*)0xB8000;
@@ -32,6 +36,10 @@ int kmain(/*struct multiboot *mboot_ptr*/) {
 	clear();
 	prints(welcomeMessage);
 	cprints(chaOS, 0x04);
+	
+	prints("Setting up GDT...\n");
+	setup_gdt();
+	prints("GDT set up successfully!");
 
 	return 0xDEADBABA;
 }
