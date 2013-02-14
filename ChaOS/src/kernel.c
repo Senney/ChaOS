@@ -1,7 +1,9 @@
 #include <stdint.h>
 
 // ChaOS includes.
+#include <system.h>
 #include <gdt.h>
+#include <acpi.h>
 
 #define CONSOLE_COLOR 0x07
 
@@ -40,6 +42,8 @@ int kmain(/*struct multiboot *mboot_ptr*/) {
 	prints("Setting up GDT...\n");
 	setup_gdt();
 	prints("GDT set up successfully!");
+	
+	setup_acpi();
 
 	return 0xDEADBABA;
 }

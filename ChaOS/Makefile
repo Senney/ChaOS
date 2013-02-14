@@ -38,5 +38,5 @@ mkdisk:
 clean:
 	rm -f *.o *~
 	rm -f $(OBJS)
-	rm -f $(C_SRC)/*~ $(ARM_SRC)/*~ $(INCLUDE)/*~
+	rm -f $(C_SRC)/*~ $(ASM_SRC)/*~ $(INCLUDE)/*~
 	rm -f pad kernel.bin floppy.img
