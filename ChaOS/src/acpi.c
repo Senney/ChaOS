@@ -35,39 +35,34 @@ static int doChecksum(struct rsdp_desc *rsdp) {
   
   int i;
  
-  int len = sizeof(struct rsdp_desc);
+  int len = sizeof(struct rsdp_desc) - 1;
   if ((*rsdp).rev == 2) {
-    prints("Detected RSDP Version 2.0");
+    prints("Detected RSDP Version 2.0\n");
     len = (*rsdp).length;
   } else {
-    prints("Detected RSDP Version 1.0");
+    prints("Detected RSDP Version 1.0\n");
   }
   
+  // Do the checksum.
   for (i = 0; i < len; i++) {
     sum += ((char *) rsdp)[i];
   }
   
-  char v;
-  itoa((*rsdp).checksum, &v, 10);
-  print(&v, 1);
-  
-  print((*rsdp).signiture, 8);
-  
-  return sum == 0;
+  return sum == (*rsdp).checksum;
 }
 
 /* Check to ensure that the rsdp was loaded properly. */
 static int check_rsdp(struct rsdp_desc *rsdp) {
   int c = doChecksum(rsdp);
   
-  return (c != 0);
+  return c;
 }
 
 void setup_acpi() {
   struct rsdp_desc rsdp;
   if (load_rsdp_desc(&rsdp) == 0 && check_rsdp(&rsdp)) {
-    prints("RSDP Descriptor Loaded Successfully!");
+    prints("RSDP Descriptor Loaded Successfully!\n");
   } else {
-    prints("Could not load the RSDP Descriptor.");
+    prints("RSDP Header failed checksum test...\n");
   }
 }

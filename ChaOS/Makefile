@@ -1,4 +1,4 @@
-GCC_ARGS = -Wall -Wextra -Werror -nostdlib -nostartfiles -nodefaultlibs -m32 -c -I$(INCLUDE)
+GCC_ARGS = -Wall -Wextra -Werror -nostdlib -nostartfiles -fno-builtin -nodefaultlibs -m32 -c -I$(INCLUDE)
 INCLUDE = include
 OBJ_OUT = obj
 ASM_OBJ = obj/asm
